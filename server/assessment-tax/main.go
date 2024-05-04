@@ -16,6 +16,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/rs/cors"
 	"github.com/shopspring/decimal"
 	"github.com/windeesel365/assessment-tax/handlefileupload"
 	"github.com/windeesel365/assessment-tax/handletax"
@@ -66,6 +67,14 @@ type KReceiptDeduction struct {
 func main() {
 
 	e := echo.New()
+	//configure cors
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:5173"}, // React's default port
+		AllowedMethods: []string{"GET", "POST", "OPTIONS"},
+	})
+
+	//wrap cors middleware to match echo MiddlewareFunc type
+	e.Use(echo.WrapMiddleware(c.Handler))
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
