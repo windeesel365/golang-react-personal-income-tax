@@ -51,3 +51,12 @@
   display: inline;
   margin-right: 10px;
 }
+
+.nav-links a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: #0056b3;
+}
